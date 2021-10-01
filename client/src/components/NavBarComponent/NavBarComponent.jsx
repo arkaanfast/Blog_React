@@ -27,7 +27,7 @@ const Navbar = () => {
                 </div>
                 <div className="nav__link">
                     <Link to='/register' onClick={() => navBarState({ page: 'register', userData: null })} style={{ textDecoration: 'none', color: 'white' }}>
-                        <h4>Don't have an account...Register here!</h4>
+                        <h4>Don't have an account...<span style={{ color: "blue" }}>Register here!</span></h4>
                     </Link>
                 </div>
             </nav>

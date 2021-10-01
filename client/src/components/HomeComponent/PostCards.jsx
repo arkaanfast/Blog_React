@@ -74,10 +74,7 @@ const PostCard = ({ postItem }) => {
         });
         const data = await res.json();
         if (res.status === 201) {
-            console.log(data);
-            const newList = commentList.concat(data);
-            console.log(newList);
-
+            const newList = data;
             setCommentList(newList);
             setLoading(false);
         } else {
