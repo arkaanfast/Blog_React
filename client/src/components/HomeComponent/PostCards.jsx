@@ -87,7 +87,7 @@ const PostCard = ({ postItem }) => {
 
 
     return (
-        <div className="card grey darken-1" style={{ width: "36rem" }} key={postItem._id}>
+        <div className="card grey darken-1" style={{ width: "100%" }} key={postItem._id}>
             <div className="card-content white-text">
                 <span style={{ color: 'black', fontSize: "2.5rem", fontWeight: 'normal' }} className="card-title">Posted By:- {postItem.postedBy.name.toUpperCase()}</span>
                 <div>

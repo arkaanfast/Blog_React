@@ -14,15 +14,6 @@ h4 {
   cursor: pointer;
 }
 
-li {
-  margin-left: 12px;
-}
-.page-item button {
-  width: 30px;
-  height: 30px;
-  text-align: center;
-}
-
 .nav__bar {
   background-color: grey;
   display: flex;
@@ -40,6 +31,45 @@ li {
   color: white;
 }
 
+.paginationBttns {
+  width: 80%;
+  height: 40px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+.paginationBttns a {
+  padding: 10px;
+  margin: 8px;
+  border-radius: 5px;
+  border: 1px solid #64b5f6;
+  color: #64b5f6;
+  cursor: pointer;
+}
+
+.paginationBttns a:hover {
+  color: white;
+  background-color: #64b5f6;
+}
+
+.paginationActive a {
+  color: white;
+  background-color: #64b5f6;
+}
+
+.paginationDisabled a {
+  color: black;
+  background-color: white;
+}
+
+.App {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100vw;
+}
 /* For mobile phones */
 @media (max-width: 575px) {
   h2 {
@@ -59,7 +89,9 @@ li {
     color: white;
   }
 
-  .nav__link {
+  .nav__link button {
     padding-bottom: 1rem;
+
+    font-size: 10px;
   }
 }

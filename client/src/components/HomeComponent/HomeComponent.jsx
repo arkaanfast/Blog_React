@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { UserContext } from '../../App';
 import PostCard from './PostCards';
-import Pagination from '../PaginationComponent/PaginationComponent';
+import ReactPaginate from "react-paginate";
+// import Pagination from '../PaginationComponent/PaginationComponent';
 
 let start = 0;
 
@@ -9,9 +10,9 @@ const Home = () => {
     const { state, dispatch } = useContext(UserContext);
     const [postList, setPostList] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(0);
     const [postsPerPage] = useState(10);
-    const [totalPost, postCount] = useState(0);
+
     useEffect(() => getPosts(), []);
 
     const getPosts = async () => {
@@ -24,32 +25,35 @@ const Home = () => {
 
         const data = await res.json();
         if (res.status === 201) {
-            setPostList(data.posts);
+            setPostList(data);
             setLoading(false);
-            postCount(data.totalPosts);
+
         } else {
             setPostList([]);
         }
     }
 
-    const paginate = async (pageNumber) => {
-        start += 10;
-        setLoading(true);
-        console.log(localStorage.getItem("jwt"));
-        const res = await fetch(`https://twimbit-api.herokuapp.com/api/post/allPosts?start=${start}`, {
-            headers: {
-                Authorization: "Bearer " + localStorage.getItem("jwt"),
-            },
-        });
+    const paginate = async ({ selected }) => {
+        setCurrentPage(selected);
+        // start += 10;
+        // setLoading(true);
+        // console.log(localStorage.getItem("jwt"));
+        // const res = await fetch(`https://twimbit-api.herokuapp.com/api/post/allPosts?start=${start}`, {
+        //     headers: {
+        //         Authorization: "Bearer " + localStorage.getItem("jwt"),
+        //     },
+        // });
 
-        const data = await res.json();
-        if (res.status === 201) {
-            setPostList(postList.concat(data.posts));
-            setLoading(false);
-            setCurrentPage(pageNumber);
-        } else {
-            setPostList([]);
-        }
+        // const data = await res.json();
+        // if (res.status === 201) {
+        //     setPostList(postList.concat(data.posts));
+        //     setLoading(false);
+
+        // } else {
+        //     setPostList([]);
+        // }
+
+
     }
 
 
@@ -78,14 +82,14 @@ const Home = () => {
         )
     }
 
-    const indexofLastPost = currentPage * postsPerPage;
+    const indexofLastPost = (currentPage + 1) * postsPerPage;
     const indexofFirstPost = indexofLastPost - postsPerPage;
     const currentPosts = postList.slice(indexofFirstPost, indexofLastPost);
 
     const content = currentPosts.map((post) => {
         return (
             <div className="row" key={post._id}>
-                <div className="col s4 offset-l4">
+                <div className="col l4 offset-l4 s12">
                     <PostCard postItem={post} />
                 </div>
             </div>
@@ -94,10 +98,10 @@ const Home = () => {
     // const rows = [...Array(Math.ceil(postList.length / 5))];
     // const postRows = rows.map((row, idx) => postList.slice(idx * 4, idx * 4 + 4));
     // const content = postRows.map((row, idx) => (
-    //     <div className="row" key={idx}>
+    //     <div className="row" style={{ textAlign: 'center' }} key={idx}>
     //         {row.map((post) => {
     //             return (
-    //                 <div className="col s4 offset-l4" >
+    //                 <div className="col s2" >
     //                     <PostCard postItem={post} />
     //                 </div>
     //             );
@@ -105,7 +109,7 @@ const Home = () => {
     //     </div>)
     // );
 
-
+    const pageCount = Math.ceil(postList.length / postsPerPage);
 
     return (
         <div className="container-fluid">
@@ -114,7 +118,19 @@ const Home = () => {
                 <h1>These are the posts</h1>
             </div>
             {content}
-            <Pagination postsPerPage={postsPerPage} totalPosts={totalPost} paginate={paginate} />
+            <div className="App">
+                <ReactPaginate
+                    previousLabel={"Previous"}
+                    nextLabel={"Next"}
+                    pageCount={pageCount}
+                    onPageChange={paginate}
+                    containerClassName={"paginationBttns"}
+                    previousLinkClassName={"previousBttn"}
+                    nextLinkClassName={"nextBttn"}
+                    disabledClassName={"paginationDisabled"}
+                    activeClassName={"paginationActive"}
+                />
+            </div>
         </div >
 
 

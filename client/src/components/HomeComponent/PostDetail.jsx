@@ -12,8 +12,8 @@ const PostDetail = () => {
 
     return (
         <div className="row" style={{ marginTop: "10rem", textAlign: "center" }}>
-            <div className="col s4 offset-l4">
-                <div className="card blue-grey darken-1" style={{ width: "36rem" }}>
+            <div className="col l4 offset-l4 s12">
+                <div className="card blue-grey darken-1" style={{ width: "100%" }}>
                     <div className="card-content white-text">
                         <span style={{ color: 'black', fontSize: "2rem" }} className="card-title">{postedBy.toUpperCase()}</span>
                         <div>
