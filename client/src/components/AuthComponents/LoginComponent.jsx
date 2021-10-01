@@ -30,7 +30,7 @@ const Login = ({ callBack }) => {
       history.push('/');
       M.toast({ html: "Successfully Loged In", classes: "#c62828 red darken-3" });
     } else if (res.status === 500) {
-      M.toast({ html: data.message, classes: "#c62828 red darken-3" });
+      M.toast({ html: data.error, classes: "#c62828 red darken-3" });
       emailState('');
       passwordState('');
       setLoading(false);

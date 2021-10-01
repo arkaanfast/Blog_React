@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Link } from "react-router-dom";
 import { UserContext } from "../../App";
 import M from "materialize-css";
+import ReadMoreReact from 'read-more-react';
 
 
 const PostCard = ({ postItem }) => {
@@ -93,7 +94,11 @@ const PostCard = ({ postItem }) => {
                 <div>
                     <h2 style={{ color: 'white' }}>{postItem.title}</h2>
                 </div>
-                <Link to={{ pathname: "/postDetails", state: { postedBy: postItem.postedBy.name, title: postItem.title, content: postItem.content } }} style={{ color: "#0818A8" }}>Know More...</Link>
+                <Link to={{ pathname: "/postDetails", state: { postedBy: postItem.postedBy.name, title: postItem.title, content: postItem.content } }} style={{ color: "black", fontSize: "1.5rem" }}><ReadMoreReact text={postItem.content}
+                    min={30}
+                    ideal={30}
+                    max={30}
+                    readMoreText="Know More.." /></Link>
 
                 <div style={{ marginTop: "1rem", display: "flex" }} >
                     {liked ?
